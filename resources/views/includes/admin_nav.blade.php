@@ -133,16 +133,7 @@
                                 </a> -->
 
                                 <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item notify-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                                     <i class="fe-log-out"></i>
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
+                                    
                             </div>
                         </li>
 
@@ -151,9 +142,7 @@
                     <ul class="list-inline menu-left mb-0">
                         <li class="float-left">
                             <a href="index.html" class="logo">
-                                <span class="logo-lg">
-                                    <img src="{{ asset('temp/assets/images/logo.png') }}" alt="" height="18">
-                                </span>
+                                
                                 <span class="logo-sm">
                                     <img src="{{ asset('temp/assets/images/logo-sm.png') }}" alt="" height="28">
                                 </span>
@@ -184,20 +173,19 @@
     
                                 <li class="has-submenu">
                                     <a href="#">
-                                        <i class="fe-layers"></i>Disbursement</a>
+                                        <i class="fe-layers"></i>Admin Account</a>
                                     <ul class="submenu">
                                         <li>
-                                            <a href="">Disbursement Plans</a>
+                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#add_account" ><i class="mdi mdi-pencil mr-1 text-muted"></i>Create Account</a>
+
                                         </li>
                                         <li>
-                                            <a href=""> Beneficiaries</a>
+                                            <a href="">View All Users</a>
                                         </li>
                                         <li>
-                                            <a href="">Disbursement Transactions</a>
+                                            <a href="">View All Business</a>
                                         </li>
-                                        <li>
-                                            <a href="">Single Transactions</a>
-                                        </li>
+                                        
                                     </ul>
                                 </li>
     
@@ -237,6 +225,11 @@
                                 <li class="has-submenu">
                                     <a href=""> <i class="fe-bookmark"></i>Settings</a>
                                 </li>
+
+                                <li class="has-submenu">
+                                    <a href="{{ route('admin-logout') }}"> <i class="fe-bookmark"></i>Logout</a>
+                                </li
+                               
     
                                 
     
@@ -252,4 +245,40 @@
             <!-- end navbar-custom -->
         </header>
         
+        <div class="modal fade" id="add_account" tabindex="-1" role="dialog" aria-labelledby="myCenterModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myCenterModalLabel">Add Account</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body p-4">
+                <form method="POST" action="{{route('admin-account')}}" aria-label="">
+                    {{ csrf_field() }}
+
+                                <div class="form-group">
+                                    <label for="register-username"><i class="icon-user"></i> <b>Username</b></label>
+                                    <input class="form-control" id="register-username" name="username" type="text" placeholder="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="register-email"><i class="icon-user"></i> <b>Email</b></label>
+                                    <input class="form-control" id="register-email" name="email" type="text" placeholder="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="register-password"><i class="icon-lock"></i> <b>Password</b></label>
+                                    <input class="form-control" id="register-password" name="password" type="password" placeholder="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="register-password2"><i class="icon-lock"></i> <b>Confirm Password</b></label>
+                                    <input class="form-control" id="register-password2" name="confirm_password" type="password" placeholder="">
+                                </div>
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-success waves-effect waves-light">Create Account</button>
+                        <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
         <!-- End Navigation Bar-->

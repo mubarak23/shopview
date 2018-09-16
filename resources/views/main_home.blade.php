@@ -1,6 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
+
 <div class="eshop-section section">
 	    	<div class="container">
 				<div class="row">

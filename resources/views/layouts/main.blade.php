@@ -9,6 +9,8 @@
         <title>ShopView -- Business Review and Shop Platform</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
+        <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
         @include('includes.styles')
     </head>
     <body>
@@ -19,7 +21,7 @@
 
         <!-- Navigation & Logo-->
         @include('includes.nav')
-        
+        @include("includes.response")
 		<!-- Main Content -->
 		@yield('content')
 	   	
