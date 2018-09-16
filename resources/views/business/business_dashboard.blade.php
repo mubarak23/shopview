@@ -5,7 +5,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12">
-						<h1>OBusiness Owner Dashboard</h1>
+						<h1>Business Owner Dashboard</h1>
 					</div>
 				</div>
 			</div>
@@ -15,79 +15,17 @@
 	    	<div class="container">
 	    		<div class="row">
 	    			<!-- Open Vacancies List -->
-	    			<div class="col-md-8">
-	    				<table class="jobs-list">
-	    					<tr>
-	    						<th>Position</th>
-	    						<th>Location</th>
-	    						<th>Type</th>
-	    					</tr>
-	    					<tr>
-	    						<!-- Position -->
-	    						<td class="job-position">
-	    							<a href="page-job-details.html">Front End Developer</a> <span class="label label-danger">New</span>
-	    						</td>
-	    						<!-- Location -->
-	    						<td class="job-location">
-	    							<div class="job-country">United Kingdom</div>
-	    							<div class="job-city">London</div>
-	    						</td>
-	    						<!-- Job Type -->
-	    						<td class="job-type hidden-phone">FULL-TIME</td>
-	    					</tr>
-	    					<tr>
-	    						<td class="job-position">
-	    							<a href="page-job-details.html">Back-end Developer</a> <span class="label label-danger">New</span>
-	    						</td>
-	    						<td class="job-location">
-	    							<div class="job-country">United Kingdom</div>
-	    							<div class="job-city">Manchester</div>
-	    						</td>
-	    						<td class="job-type hidden-phone">PART-TIME</td>
-	    					</tr>
-	    					<tr>
-	    						<td class="job-position">
-	    							<a href="page-job-details.html">Creative Director</a>
-	    						</td>
-	    						<td class="job-location">
-	    							<div class="job-country">United Kingdom</div>
-	    							<div class="job-city">Manchester</div>
-	    						</td>
-	    						<td class="job-type hidden-phone">PART-TIME</td>
-	    					</tr>
-	    					<tr>
-	    						<td class="job-position">
-	    							<a href="page-job-details.html">Interactive Developer</a> <span class="label label-danger">New</span>
-	    						</td>
-	    						<td class="job-location">
-	    							<div class="job-country">United Kingdom</div>
-	    							<div class="job-city">Manchester</div>
-	    						</td>
-	    						<td class="job-type hidden-phone">PART-TIME</td>
-	    					</tr>
-	    					<tr>
-	    						<td class="job-position">
-	    							<a href="page-job-details.html">Lead Designer</a>
-	    						</td>
-	    						<td class="job-location">
-	    							<div class="job-country">United Kingdom</div>
-	    							<div class="job-city">Manchester</div>
-	    						</td>
-	    						<td class="job-type hidden-phone">PART-TIME</td>
-	    					</tr>
-	    					<tr>
-	    						<td class="job-position">
-	    							<a href="page-job-details.html">Ruby on Rails Developer</a>
-	    						</td>
-	    						<td class="job-location">
-	    							<div class="job-country">United Kingdom</div>
-	    							<div class="job-city">Manchester</div>
-	    						</td>
-	    						<td class="job-type hidden-phone">PART-TIME</td>
-	    					</tr>
-	    				</table>
+	    			<div class="col-md-4">
+	    				<h3>Profile</h3>
+	    				<p><label>Name:</label></p>
+	    				<p><label>Email:</label></p>
+	    				<p><label>Number of Product:</label></p>
 	    			</div>
-	    			<!-- End Open Vacancies List -->
+	    			<div class="col-md-4">
+	    				<h3>Business Details</h3>
+	    				<button class="btn btn-success"><a href="{{ route('add-business') }}">Add Business</a></button>
+	    			</div>
+	    			
 	    			<!-- Sidebar -->
 	    			<div class="col-md-4 col-sm-6">
 	    				<div class="join-us-promo">

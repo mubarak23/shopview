@@ -19,6 +19,7 @@ Route::get('/business', 'BusinessController@business_details')->name('business_d
 Route::get('/business/register_owner', 'BusinessController@register_owner')->name('register-owner');
 Route::post('/business/process_owner', 'BusinessController@process_owner')->name('process-owner');
 Route::get('/business/business_dashboard', 'BusinessController@business_dashboard')->name('business-dashboard');
+Route::get('/business/register_business', 'BusinessController@register_business')->name('add-business');
 
 
 //Admin Route Section

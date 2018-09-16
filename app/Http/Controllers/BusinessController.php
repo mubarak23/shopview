@@ -64,6 +64,15 @@ class BusinessController extends Controller
 
     }
 
+    public function register_business(){
+    	//show the business registreation form
+    	return view('business.register_business');
+    }
+
+    public function process_business(Request $request){
+
+    }
+
 
 
 

@@ -15,8 +15,12 @@
 										<li role="menuitem"><a href="#"><img src="img/flags/es.png" alt="Spain"> ES</a></li>
 									</ul>
 								</div>
+								@guest
 							</li>
 			        		<li><a href="{{ route('user_login') }}">Login</a></li>
+			        		@else
+			        		<li><a href="{{ route('admin-logout') }}">Logout</a></li>
+			        		@endguest
 			        	</ul>
 					</div>
 		        </div>
