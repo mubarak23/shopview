@@ -15,6 +15,8 @@ Route::get('/', 'UserController@Home')->name('main-home');
 
 //business Route Section
 Route::get('/business/business_details/{business_id}', 'BusinessController@business_details')->name('business_details');
+Route::post('/business/business_review', 'BusinessController@review')->name('business-review');
+
 //register business owner
 Route::get('/business/register_owner', 'BusinessController@register_owner')->name('register-owner');
 Route::post('/business/process_owner', 'BusinessController@process_business')->name('process-owner');

@@ -6,6 +6,8 @@ use Auth;
 use DB;
 use Response;
 use App\Business;
+use App\Review;
+use App\Star_rating;
 
 use Illuminate\Http\Request;
 
@@ -152,6 +154,33 @@ class BusinessController extends Controller
         throw $e;
         DB::rollback();
       }
+
+    }
+
+    public function review(Request $request){
+        $data = $request->all();
+        //run valuidation on user input
+        $validate_data = $request->validate([
+                'review' => 'required',
+            ]);
+           
+           //process review of user
+           DB::beginTransaction();
+           try{
+                $add_review = new Review();
+                $add_review->user_id = Auth::user()->id;
+                $add_review->user_role = Auth::user()->user_role;
+                $add_review->business_id = $data['business_id'];
+                $add_review->businss_name = $data['business_name'];
+                $add_review->review = $data['review'];
+                $add_review->save();
+            DB::commit();
+            return redirect()->route('main-home');
+           }catch(Exception $e){
+            throw $e;
+            DB::rollback();
+           }
+
 
     }
 

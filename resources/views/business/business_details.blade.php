@@ -69,13 +69,14 @@
 								<div class="tab-pane active" id="tab1">
 									<h4>Leave a Review About this Business</h4>
 									<form method="post" action="{{ route('business-review') }}">
+										{{ csrf_field() }}
 										<div>
 											<input type="hidden" name="business_id" value="{{ $businesss_details->id }}">
 											<input type="hidden" name="business_name" value="{{ $businesss_details->business_name }}">
 										</div>
 										<div class="form-group">
 											<label>Review</label>
-											<textarea class="form-control" cols="2" rows="2" name="Review"></textarea>
+											<textarea class="form-control" cols="2" rows="2" name="review"></textarea>
 										</div>
 										<div class="form-group">
 											<input type="submit" name="submit" value="Submit Review" class="btn btn-success">
