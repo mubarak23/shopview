@@ -14,16 +14,24 @@
 Route::get('/', 'UserController@Home')->name('main-home');
 
 //business Route Section
-Route::get('/business', 'BusinessController@business_details')->name('business_details');
+Route::get('/business/business_details/{business_id}', 'BusinessController@business_details')->name('business_details');
 //register business owner
 Route::get('/business/register_owner', 'BusinessController@register_owner')->name('register-owner');
-Route::post('/business/process_owner', 'BusinessController@process_owner')->name('process-owner');
+Route::post('/business/process_owner', 'BusinessController@process_business')->name('process-owner');
 Route::get('/business/business_dashboard', 'BusinessController@business_dashboard')->name('business-dashboard');
 Route::get('/business/register_business', 'BusinessController@register_business')->name('add-business');
+Route::post('/business/upload_logo', 'BusinessController@upload_logo')->name('upload-logo');
 
 
 //Admin Route Section
 Route::get('/admin', 'AdminController@admin_dashboard')->name('admin-home');
+//Admin Business Crud
+Route::post('/admin/edit_business/{$business_id}', 'AdminController@edit_business')->name('edit-business');
+Route::get('/admin/delete_business/{business_id}', 'AdminController@delete_business')->name('delete-business');
+//Admin User Crud
+Route::post('/admin/edit_user/{$user_id}', 'AdminController@edit_user')->name('edit-user');
+Route::get('/admin/delete_user/{user_id}', 'AdminController@delete_user')->name('delete-user');
+
 
 Route::post('admin/admin_register', 'AdminController@admin_account')->name('admin-account');
 

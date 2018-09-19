@@ -5,21 +5,21 @@
 	        	<div class="menuextras">
 					<div class="extras">
 						<ul>
-							<li class="shopping-cart-items"><i class="glyphicon glyphicon-shopping-cart icon-white"></i> <a href="page-shopping-cart.html"><b>3 items</b></a></li>
 							<li>
 								<div class="dropdown choose-country">
-									<a class="#" data-toggle="dropdown" href="#"><img src="img/flags/gb.png" alt="Great Britain"> UK</a>
-									<ul class="dropdown-menu" role="menu">
-										<li role="menuitem"><a href="#"><img src="img/flags/us.png" alt="United States"> US</a></li>
-										<li role="menuitem"><a href="#"><img src="img/flags/de.png" alt="Germany"> DE</a></li>
-										<li role="menuitem"><a href="#"><img src="img/flags/es.png" alt="Spain"> ES</a></li>
-									</ul>
+									<h4>
+										@guest
+										Welcome
+										@else
+										Welcome {{ Auth::user()->id }}
+										@endguest
+									</h4>
 								</div>
-								@guest
 							</li>
-			        		<li><a href="{{ route('user_login') }}">Login</a></li>
+							@guest
+			        		<li><h5><a href="{{ route('user_login') }}">Login</a></h5></li>
 			        		@else
-			        		<li><a href="{{ route('admin-logout') }}">Logout</a></li>
+			        		<li><h5><a href="{{ route('admin-logout') }}">Logout</a></h5></li>
 			        		@endguest
 			        	</ul>
 					</div>

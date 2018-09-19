@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BusinessController;
 use Illuminate\Http\Request;
 use App\User;
+use App\Business;
 use Auth;
 use DB;
 use Response;
@@ -14,7 +15,9 @@ class UserController extends Controller
 {
 	//home page 
 	public function Home(){
-		return view('main_home');
+			//collect business details
+		$businesses = Business::paginate(10);
+		return view('main_home')->with(['all_business' => $businesses]);
 	}
 
     //User Registration

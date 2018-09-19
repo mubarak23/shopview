@@ -41,7 +41,7 @@
 								</div>
 								<div class="form-group">
 		        				 	<label for="opening_hours"><i class="icon-lock"></i> <b>Opening Hours</b></label>
-									<input class="form-control" id="opening_hours" name="opening_hours" type="text" placeholder="">
+									<input class="timepicker form-control" id="opening_hours" name="opening_hours" type="text" placeholder="">
 								</div>
 								<div class="form-group">
 		        				 	<label for=""><i class="icon-lock"></i> <b>Start Day</b></label>
@@ -68,6 +68,13 @@
 									</select>
 								</div>
 								<div class="form-group">
+		        				 	<label for=""><i class="icon-lock"></i> <b>Business Type</b></label>
+									<select name="type" class="form-control">
+									  <option value="Product">Products</option>
+									  <option value="Services">Services</option>
+									</select>
+								</div>
+								<div class="form-group">
 		        				 	<label for="phone_number"><i class="icon-lock"></i><b>Phone Number</b></label>
 									<input class="form-control" id="phone_number" name="phone_number" type="text" placeholder="phone number">
 								</div>
@@ -76,9 +83,10 @@
 									<input class="form-control" id="email_address" name="email" type="text" placeholder="Email Address">
 								</div>
 								<div class="form-group">
-		        				 	<label for="email"><i class="icon-lock"></i><b>Business Logo</b></label>
-									<input class="form-control" id="business_logo" name="email" type="file" placeholder="Business Logo">
+		        				 	<label for="email"><i class="icon-lock"></i><b>Website url</b></label>
+									<input class="form-control" id="website_url" name="website_url" type="text" placeholder="Business website">
 								</div>
+								
 								<div class="form-group">
 									<button type="submit" class="btn pull-right">Register</button>
 									<div class="clearfix"></div>
@@ -93,4 +101,14 @@
 	    		</div>
 			</div>
 		</div>
+
+<script type="text/javascript">
+
+    $('.timepicker').datetimepicker({
+
+        format: 'HH:mm:ss'
+
+    }); 
+
+</script> 
 		@endsection()

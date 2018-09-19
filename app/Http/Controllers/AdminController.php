@@ -1,9 +1,8 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\User;
+use App\Business;
 use Auth;
 use DB;
 use Response;
@@ -12,7 +11,9 @@ class AdminController extends Controller
 {
     //
     public static function admin_dashboard(){
-    	return view('admin.Home')->with('status', 'Welcome To Admin Section');
+        $all_business = Business::paginate('5');
+        $all_users = User::paginate('5');
+    	return view('admin.Home')->with(['all_businesses' => $all_business,'all_users' => $all_users]);
     }
 
     public function admin_account(Request $request){
@@ -51,4 +52,45 @@ class AdminController extends Controller
     	return $register_admin;
 
     }
+
+   public function edit_business(Request $request, $business_id){
+            $data = $request->all();
+            //find the bisuness by it id
+            DB::beginTransaction();
+            try{
+                $edit_business = Business::where('id', $business_id);
+                if(!empty($data['business_name'])){
+                    $edit_business->business_name = $data['business_name'];
+                }elseif(!empty($data['business_address'])){
+                    $edit_business->business_address = $data['business_address'];
+                }elseif(!empty($data['email'])){
+                    $edit_business->email = $data['email'];
+                }elseif(!empty($data['phone'])){
+                    $edit_business->phone_number = $data['phone_number'];
+                }
+                $edit_business->save();
+                DB::commit();
+                //return to Admin dashboard
+                return redirect()->route('admin-home')->with('status', 'Business Account Edited');
+            }catch(Exception $e){
+                throw $e;
+                DB::rollback();
+            }
+
+
+   }
+
+    public function delete_business($business_id){
+            return "Good From this ends";
+
+    }
+
+    public function edit_user(Request $request, int $user_id){
+            return "Good From this end";
+    }
+
+    public function delete_user($user_id){
+            return "Good from the Controller End". ' '. $user_id;
+    }
+
 }

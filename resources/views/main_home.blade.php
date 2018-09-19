@@ -5,6 +5,7 @@
 <div class="eshop-section section">
 	    	<div class="container">
 				<div class="row">
+					@foreach($all_business as $business)
 					<div class="col-md-3 col-sm-6">
 						<!-- Product -->
 						<div class="shop-item">
@@ -14,7 +15,7 @@
 							</div>
 							<!-- Product Title -->
 							<div class="title">
-								<h3><a href="page-product-details.html">Lorem ipsum dolor</a></h3>
+								<h3><a href="page-product-details.html">{{ $business->business_name}}</a></h3>
 							</div>
 							<!-- Product Available Colors-->
 							<div class="colors">
@@ -26,15 +27,16 @@
 							</div>
 							<!-- Product Price-->
 							<div class="price">
-								$999.99
+								10 Review
 							</div>
 							<!-- Add to Cart Button -->
 							<div class="actions">
-								<a href="page-product-details.html" class="btn btn-small"><i class="icon-shopping-cart icon-white"></i> Add to Cart</a>
+								<a href="{{ url('/business/business_details', $business->id)}}" class="btn btn-small"><i class="icon-shopping-cart icon-white"></i>View Business Details</a>
 							</div>
 						</div>
 						<!-- End Product -->
 					</div>
+					@endforeach()
 					<div class="col-md-3 col-sm-6">
 						<div class="shop-item">
 							<div class="shop-item-image">

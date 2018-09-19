@@ -5,19 +5,23 @@ use App\User;
 use Auth;
 use DB;
 use Response;
+use App\Business;
 
 use Illuminate\Http\Request;
 
 class BusinessController extends Controller
 {
     //show business details
-    public function business_details(){
-    	return view('business.business_details');
+    public function business_details($businesss_id){
+        $business_detail = Business::where('id', $businesss_id)->first();
+    	return view('business.business_details')->with(['businesss_details' => $business_detail]);
     }
 
     //show business ownner dashboard
     public static function business_dashboard(){
-    	return view('business.business_dashboard');
+        //get the business details
+        $businesss_details = Business::where('user_id', Auth::user()->id)->first();
+    	return view('business.business_dashboard')->with(['business_details' => $businesss_details ]);
     }
 
     //show registration form for businesss owner
@@ -70,9 +74,86 @@ class BusinessController extends Controller
     }
 
     public function process_business(Request $request){
+            //collect all data
+            $data = $request->all();
 
+           //run validation
+            $validate_data = $request->validate([
+                'business_name' => 'required',
+                'business_address' => 'required',
+                'opening_hours'     => 'required',
+                'start_day'     => 'required',
+                'close_day'    => 'required',
+                'type'   => 'required',
+                'phone_number'  => 'required',
+                'website_url'   => 'required'
+            ]);
+           // 
+           
+            DB::beginTransaction();
+            try{
+
+                self::busniness_store($data);
+                DB::commit();
+                return redirect()->route('business-dashboard')->with('status', 'Business Account Successfully Created');
+
+            }catch(exception $e){
+                throw $e;
+                DB::rollback();
+            }
     }
 
+    public function busniness_store($data){
+
+            $working_days = $data['start_day']. ' ' .$data['close_day'];
+            //create new business
+            $register_business = new Business();
+            $register_business->user_id = Auth::user()->id;
+            $register_business->user_role = Auth::user()->user_role;
+            $register_business->business_name = $data['business_name'];
+            $register_business->business_address = $data['business_address'];
+            $register_business->opening_hours = $data['opening_hours'];
+            $register_business->working_days = $working_days;
+            $register_business->phone_number = $data['phone_number'];
+            $register_business->email = $data['email'];
+            $register_business->business_type = $data['type'];
+            $register_business->website_url = $data['website_url'];
+
+            $register_business->save();
+            return $register_business;
+    }
+
+
+    public function upload_logo(Request $request){
+            // Get filename with extension
+      $filenameWithExt = $request->file('logo')->getClientOriginalName();
+
+      // Get just the filename
+      $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+
+      // Get extension
+      $extension = $request->file('logo')->getClientOriginalExtension();
+
+      // Create new filename
+      $filenameToStore = $filename.'_'.time().'.'.$extension;
+
+      // Uplaod image
+      $path= $request->file('photo')->storeAs('public/img/', $filenameToStore);
+      DB::beginTransaction();
+      try{  
+         $store_logo = Business::where('user_id', Auth::user()->id);
+      $store_logo->businesss_logo = $filenameToStore;
+      $store_logo->save();
+      return redirect()->route('business-dashboard')->with('status', 'Bus
+     iness Account Successfully Created');
+
+        DB::commit();
+      }catch(Exception $e){
+        throw $e;
+        DB::rollback();
+      }
+
+    }
 
 
 
