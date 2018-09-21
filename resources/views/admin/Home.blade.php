@@ -114,10 +114,13 @@
                         <div class="modal-body p-4">
                             <div class="tab-content">
                                 <div class="tab-pane active" id="edit_business">
-                                    <form method="post" action="{{ url('/admin/edit_business', $all_business->id) }}"" aria-label="{{ __('edit_business') }}">
+                                    <form method="post" action="{{ url('/admin/edit_business') }}"" aria-label="{{ __('edit_business') }}">
                                         {{ csrf_field() }}
                                         <div class="form-group">
                                             <input type="hidden" name="user_id" class="form-control" value="{{$all_business->user_id}}">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="hidden" name="business_id" class="form-control" value="{{$all_business->id}}">
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Business Name</label>
@@ -198,7 +201,7 @@
                         <div class="modal-body p-4">
                             <div class="tab-content">
                                 <div class="tab-pane active" id="edit_user">
-                                    <form method="post" action="{{ url('/admin/edit_user', $user->id) }}"" aria-label="{{ __('edit_user') }}">
+                                    <form method="post" action="{{ url('/admin/user_edit', $user->id) }}"" aria-label="{{ __('edit_user') }}">
                                         {{ csrf_field() }}
                                         <div class="form-group">
                                             <input type="hidden" name="user_id" class="form-control" value="{{$user->user_id}}">
@@ -209,7 +212,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Email Address</label>
-                                            <input type="text" name="business_address" class="form-control" value ="{{ $user->email}}">
+                                            <input type="text" name="email" class="form-control" value ="{{ $user->email}}">
                                         </div>
                                         <div>
                                         <label for="exampleInputEmail1">User Role </label>

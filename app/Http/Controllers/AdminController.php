@@ -53,19 +53,23 @@ class AdminController extends Controller
 
     }
 
-   public function edit_business(Request $request, $business_id){
+   public function edit_business(Request $request){
             $data = $request->all();
+            //return $data;
             //find the bisuness by it id
             DB::beginTransaction();
             try{
-                $edit_business = Business::where('id', $business_id);
+                $edit_business = Business::find($data['business_id']);
                 if(!empty($data['business_name'])){
                     $edit_business->business_name = $data['business_name'];
-                }elseif(!empty($data['business_address'])){
+                }
+                if(!empty($data['business_address'])){
                     $edit_business->business_address = $data['business_address'];
-                }elseif(!empty($data['email'])){
+                }
+                if(!empty($data['email'])){
                     $edit_business->email = $data['email'];
-                }elseif(!empty($data['phone'])){
+                }
+                if(!empty($data['phone'])){
                     $edit_business->phone_number = $data['phone_number'];
                 }
                 $edit_business->save();
@@ -86,7 +90,29 @@ class AdminController extends Controller
     }
 
     public function edit_user(Request $request, int $user_id){
-            return "Good From this end";
+            $data = $request->all();
+            //find the user
+            $edit_user = User::find($user_id);
+            DB::beginTransaction();
+            try{
+
+            if(!empty($data['username'])){
+                $edit_user->username = $data['username'];
+            }
+            if(!empty($data['email'])){
+                $edit_user->email = $data['email'];
+            }
+            if(!empty($data['user_role'])){
+                $edit_user->user_role = $data['user_role'];
+            }
+            $edit_user->save();
+            DB::commit();
+            //return to Admin dashboard
+                return redirect()->route('admin-home')->with('status', 'User Account Edited');
+            }catch(Exeception $e){
+                throw $e;
+                DB::rollback();
+            }
     }
 
     public function delete_user($user_id){
