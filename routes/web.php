@@ -24,18 +24,15 @@ Route::get('/business/business_dashboard', 'BusinessController@business_dashboar
 Route::get('/business/register_business', 'BusinessController@register_business')->name('add-business');
 Route::post('/business/upload_logo', 'BusinessController@upload_logo')->name('upload-logo');
 
-
 //Admin Route Section
 Route::get('/admin', 'AdminController@admin_dashboard')->name('admin-home');
-//Admin Business Crud
-Route::post('/admin/edit_business/', 'AdminController@edit_business')->name('edit-business');
 
+Route::post('admin/admin_register', 'AdminController@admin_account')->name('admin-account');
+//Admin Business Crud
+Route::post('/admin/edit_business/{$business_id}', 'AdminController@edit_business')->name('edit-business');
 
 Route::get('/admin/delete_business/{business_id}', 'AdminController@delete_business')->name('delete-business');
 
-
-
-Route::post('admin/admin_register', 'AdminController@admin_account')->name('admin-account');
 //Admin User Crud
 Route::post('/admin/user_edit/{user_id}', 'AdminController@edit_user')->name('edit-user');
 
@@ -51,7 +48,6 @@ Route::get("user/login", "UserController@user_login")->name("user_login");
 Route::post("user/process_login", "UserController@process_login")->name("process_login");
 
 Route::get('admin/admin_logout', 'UserController@admin_logout')->name('admin-logout');
-
 
 //Auth::routes();
 

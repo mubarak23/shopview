@@ -65,7 +65,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <form id="w-form" method="post" action="{{ route('upload-logo') }}">
+          <form id="w-form" method="post" enctype="multipart/form-data" action="{{ route('upload-logo') }}">
           	{{ csrf_field() }}
             <div class="form-group">
               <label for="city">Upload Logo</label>

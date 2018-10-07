@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Storage;
 use App\User;
 use Auth;
 use DB;
@@ -128,32 +129,30 @@ class BusinessController extends Controller
 
     public function upload_logo(Request $request){
             // Get filename with extension
-      $filenameWithExt = $request->file('logo')->getClientOriginalName();
+            if($request->hasFile('logo')){
+                $logo = $request->file('logo');
 
-      // Get just the filename
-      $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+                DB::beginTransaction();
+                try{
+                 //get file original extension   
+                $filename = $request->logo->getClientOriginalName();
+                $request->logo->storeAs('public/logo', $filename);
+                 //find the business
+                 $upload_logo = Business::where('user_id', Auth::user()->id)->first();
+                 $upload_logo->business_logo = $filename;
+                 $upload_logo->save();
+                 return redirect()->back();
 
-      // Get extension
-      $extension = $request->file('logo')->getClientOriginalExtension();
+                    DB::commit();
+                }catch(Exception $e){
+                    throw $e;
+                    DB::rollback();
+                }
 
-      // Create new filename
-      $filenameToStore = $filename.'_'.time().'.'.$extension;
-
-      // Uplaod image
-      $path= $request->file('photo')->storeAs('public/img/', $filenameToStore);
-      DB::beginTransaction();
-      try{  
-         $store_logo = Business::where('user_id', Auth::user()->id);
-      $store_logo->businesss_logo = $filenameToStore;
-      $store_logo->save();
-      return redirect()->route('business-dashboard')->with('status', 'Bus
-     iness Account Successfully Created');
-
-        DB::commit();
-      }catch(Exception $e){
-        throw $e;
-        DB::rollback();
-      }
+               }else{
+                return "Not Good Here";
+               }
+     
 
     }
 

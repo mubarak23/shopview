@@ -52,10 +52,11 @@ class AdminController extends Controller
     	return $register_admin;
 
     }
+    
 
    public function edit_business(Request $request){
             $data = $request->all();
-            //return $data;
+            return $data;
             //find the bisuness by it id
             DB::beginTransaction();
             try{
@@ -95,7 +96,6 @@ class AdminController extends Controller
             $edit_user = User::find($user_id);
             DB::beginTransaction();
             try{
-
             if(!empty($data['username'])){
                 $edit_user->username = $data['username'];
             }
