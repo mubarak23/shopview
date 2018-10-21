@@ -95,6 +95,9 @@
                                                 <div>
                                                     <a href="#" class="btn btn-success" data-toggle="modal" data-target="#all_business_{{$all_business->id}}" ><i class="mdi mdi-pencil mr-1 text-muted"></i>Edit Business</a>
                                                 </div>
+                                                 <div>
+                                                    <a href="#" class="btn btn-success" data-toggle="modal" data-target="#productModal_{{$all_business->id}}" ><i class="mdi mdi-pencil mr-1 text-muted"></i>Add Product</a>
+                                                </div>
 
                                                 <div>
                                                     <a href="{{ url('/admin/delete_business', $all_business->id)}}" class="btn btn-success"><i class="mdi mdi-pencil mr-1 text-muted"></i>Delete</a>
@@ -140,6 +143,7 @@
                                         </div>
                                         <div class="text-right">
                                             <button type="submit" class="btn btn-success waves-effect waves-light">Edit Business</button>
+
                                             <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
                                         </div>
                                     </form>
@@ -149,6 +153,47 @@
                     </div>
                 </div>
             </div>
+
+
+                        <!-- Modal product -->
+                <div class="modal fade" id="productModal_{{$all_business->id}}" tabindex="-1" role="dialog" aria-labelledby="locModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="locModalLabel">Add Product</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <form id="w-form" method="post" enctype="multipart/form-data" action="{{ url('/product/add') }}">
+                            {{ csrf_field() }}
+                            <div class="form-group">
+                              
+                              <input type="hidden" name="business_id" value="{{ $all_business->id }}" class="form-control">
+                            </div>
+                            <div class="form-group">
+                              <label for="city">Product Name</label>
+                              <input type="text" name="name" class="form-control">
+                            </div>
+                            <div class="form-group">
+                              <label for="city">Product Price: N</label>
+                              <input type="number" name="price" class="form-control">
+                            </div>
+                            <div class="form-group">
+                              <label for="city">Product Description</label>
+                              <textarea type="text" cols="10" rows="10" class="form-control" name="product_description"></textarea> 
+                            </div>
+                            <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <input type="submit" class="btn btn-primary" name="Upload" value="Upload"> 
+                        </div>
+                          </form>
+                        </div>
+                        
+                      </div>
+                    </div>
+                  </div>
                                 @empty
                                 @endforelse
                                 </tbody>
@@ -225,6 +270,9 @@
                                         
                                         <div class="text-right">
                                             <button type="submit" class="btn btn-success waves-effect waves-light">Edit Business</button>
+                                            
+
+                                            
                                             <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
                                         </div>
                                     </form>
@@ -245,6 +293,44 @@
         </div>
         
         <!-- end row -->
+
+
+
+        <!-- Modal product -->
+<div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="locModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="locModalLabel">Add Product</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="w-form" method="post" enctype="multipart/form-data" action="{{ url('/product/add') }}">
+            {{ csrf_field() }}
+            <div class="form-group">
+              <label for="city">Product Name</label>
+              <input type="text" name="name" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="city">Product Price: N</label>
+              <input type="number" name="price" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="city">Product Description</label>
+              <textarea type="text" cols="10" rows="10" class="form-control" name="product_description"></textarea> 
+            </div>
+            <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <input type="submit" class="btn btn-primary" name="Upload" value="Upload"> 
+        </div>
+          </form>
+        </div>
+        
+      </div>
+    </div>
+  </div>
 
         
     </div> <!-- end container -->

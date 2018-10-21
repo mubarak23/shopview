@@ -41,6 +41,11 @@
 	    					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#locModal">
          						   Upload Logo
          					 </button>
+         					 <br>
+                   <hr>
+         					 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#productModal">
+         						   Add a Product
+         					 </button>
 	    						
 	    					@else
 	                    	<div class="author-photo">
@@ -70,6 +75,42 @@
             <div class="form-group">
               <label for="city">Upload Logo</label>
               <input type="file" id="city" name="logo" class="form-control">
+            </div>
+            <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <input type="submit" class="btn btn-primary" name="Upload" value="Upload"> 
+        </div>
+          </form>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  
+  		<!-- Modal product -->
+<div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="locModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="locModalLabel">Add Product</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="w-form" method="post" enctype="multipart/form-data" action="{{ url('/product/add') }}">
+          	{{ csrf_field() }}
+            <div class="form-group">
+              <label for="city">Product Name</label>
+              <input type="text" name="name" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="city">Product Price: N</label>
+              <input type="number" name="price" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="city">Product Description</label>
+              <textarea type="text" cols="10" rows="10" class="form-control" name="product_description"></textarea> 
             </div>
             <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

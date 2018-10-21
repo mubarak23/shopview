@@ -30,6 +30,7 @@
 	    @include('includes.footer')
 
         @include('includes.js')
+        <script src="{{ asset('js/app.js') }}"></script>
 
     </body>
 </html>

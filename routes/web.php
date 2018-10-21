@@ -24,6 +24,9 @@ Route::get('/business/business_dashboard', 'BusinessController@business_dashboar
 Route::get('/business/register_business', 'BusinessController@register_business')->name('add-business');
 Route::post('/business/upload_logo', 'BusinessController@upload_logo')->name('upload-logo');
 
+//Product Route
+Route::post('/product/add', 'ProductController@add_product')->name('add-product');
+
 //Admin Route Section
 Route::get('/admin', 'AdminController@admin_dashboard')->name('admin-home');
 
