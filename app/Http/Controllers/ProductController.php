@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Business;
 use App\User;
 use DB;
+use Auth;
 
 class ProductController extends Controller
 {
@@ -22,10 +23,22 @@ class ProductController extends Controller
     			'price'		=> 'required'
     	]);
 
-    
+        if($request->hasFile('product_image')){
+                $logo = $request->file('product_image');
+                $random_name = time().mt_rand();
+
+                $FileOriginalName = $request->product_image->getClientOriginalName();
+                $FileUploadName = $random_name. '.' .$FileOriginalName;
+
+                $request->product_image->storeAs('public/images', $FileUploadName);
+
+                
+            }
+
+
     	$data = $request->all();
         //return $data;
-    	$process_data = self::store($data);
+    	$process_data = self::store($data, $FileUploadName);
     	if($process_data){
             
     		return redirect()->back()->with("status", "Product Add Successfully");
@@ -39,7 +52,7 @@ class ProductController extends Controller
     }
 
 
-    public function store($data){
+    public function store($data, $FileUploadName){
                //return $data;
 
     		//process the result in the DB
@@ -51,12 +64,13 @@ class ProductController extends Controller
     			$add_product->business_id = $data['business_id'];
     			$add_product->name = $data['name'];
     			$add_product->price = $data['price'];
+                $add_product->product_img = $FileUploadName;
     			$add_product->description = $data['product_description'];
     			$add_product->save();
                 DB::commit();
     			//return result back to the add product function above
     			return $add_product;
-    			DB::commit();
+    			
 
     		}catch(Exception $e){
     			throw $e;
@@ -65,13 +79,15 @@ class ProductController extends Controller
 
     }
 
- //product per business
+    //product per business
     public function business_products($business_id){
         //use bisuness id to get all product
         $title = 'All Product of a particular business';
         /*$business = Business::where('user_id', Auth::user()->id)->select('buainess_id')->get();*/
         //$buainess_id = $buainess->business_id;
-        $all_products = Product::where('business_id', $business_id)->first();
+        $all_products = Product::where('business_id', $business_id)->get();
+        //return $all_products;
+
         return view('business.products.products')->with(['all_products' => $all_products, 'title' => $title]);
 
     }
@@ -79,6 +95,8 @@ class ProductController extends Controller
     public function product_details($product_id){
         $title = "Product details";
         $product_details = Product::where('id', $product_id)->get();
+        return $product_details;
+
         return view('business.products.product_details');
 
     }

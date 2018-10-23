@@ -12,7 +12,7 @@
 						<div class="shop-item">
 							<!-- Product Image -->
 							<div class="shop-item-image">
-								<a href="page-product-details.html"><img src="{{ asset('img/product1.jpg') }}" alt="Item Name"></a>
+								<a href="page-product-details.html"><img src="{{ asset('public/image/'.$product->product_img ) }}" alt="Item Name"></a>
 							</div>
 							<!-- Product Title -->
 							<div class="title">

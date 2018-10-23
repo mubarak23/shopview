@@ -108,7 +108,9 @@
         </div>
         <div class="modal-body">
           <form id="w-form" method="post" enctype="multipart/form-data" action="{{ url('/product/add') }}">
-          	{{ csrf_field() }}
+          	{{ csrf_field() }}  
+              <input type="hidden" name="business_id" value="{{ $business_details->id }}" class="form-control">
+            
             <div class="form-group">
               <label for="city">Product Name</label>
               <input type="text" name="name" class="form-control">
