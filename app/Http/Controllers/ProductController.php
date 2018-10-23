@@ -94,10 +94,13 @@ class ProductController extends Controller
 
     public function product_details($product_id){
         $title = "Product details";
-        $product_details = Product::where('id', $product_id)->get();
-        return $product_details;
+        $product_details = Product::where('id', $product_id)->first();
+        $business_id = $product_details->business_id;
+        //return $business_id;
+        $business_details = Business::find($business_id);
+        //return $product_details;
 
-        return view('business.products.product_details');
+        return view('business.products.product_details')->with(['title' => $title, 'products_details' => $product_details, 'business_details' => $business_details]);
 
     }
 

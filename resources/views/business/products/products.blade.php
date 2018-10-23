@@ -32,7 +32,9 @@
 							</div>
 							<!-- Add to Cart Button -->
 							<div class="actions">
-								<a href="{{ url('/product/product_detail/', $product->id)}}" class="btn btn-small"><i class="icon-shopping-cart icon-white"></i>View Product Details</a>
+								<a href="{{ url('/product/product_details', $product->id)}}" 
+									
+									class="btn btn-small"><i class="icon-shopping-cart icon-white"></i>View Product Details</a>
 							</div>
 						</div>
 						<!-- End Product -->

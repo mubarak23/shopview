@@ -27,7 +27,7 @@ Route::get('/business/business_product/{business_id}', 'ProductController@busine
 
 //Product Route
 Route::post('/product/add', 'ProductController@add_product')->name('add-product');
-Route::get('/product/product_detail/{product_id}', 'ProductController@product_details')->name('product_details');
+Route::get('/product/product_details/{product_id}', 'ProductController@product_details')->name('product_details');
 
 //Admin Route Section
 Route::get('/admin', 'AdminController@admin_dashboard')->name('admin-home');
