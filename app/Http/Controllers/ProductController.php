@@ -44,6 +44,7 @@ class ProductController extends Controller
     		try{
     			//create the product model
     			$add_product = new Product();
+                $add_product->user_id = Auth::user()->id;
     			$add_product->business_id = $data['business_id'];
     			$add_product->name = $data['name'];
     			$add_product->price = $data['price'];

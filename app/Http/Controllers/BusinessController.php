@@ -7,6 +7,7 @@ use Auth;
 use DB;
 use Response;
 use App\Business;
+use App\Product;
 use App\Review;
 use App\Star_rating;
 
@@ -24,7 +25,9 @@ class BusinessController extends Controller
     public static function business_dashboard(){
         //get the business details
         $businesss_details = Business::where('user_id', Auth::user()->id)->first();
-    	return view('business.business_dashboard')->with(['business_details' => $businesss_details ]);
+        $num_of_product = Product::where('user_id', Auth::user()->id)->first();
+
+    	return view('business.business_dashboard')->with(['business_details' => $businesss_details, 'number_of_product' => $num_of_product ]);
     }
 
     //show registration form for businesss owner
@@ -131,15 +134,21 @@ class BusinessController extends Controller
             // Get filename with extension
             if($request->hasFile('logo')){
                 $logo = $request->file('logo');
+                $random_name = time().mt_rand();
+
+                $FileOriginalName = $request->logo->getClientOriginalName();
+                $FileUploadName = $random_name. '.' .$FileOriginalName;
+
+
 
                 DB::beginTransaction();
                 try{
                  //get file original extension   
-                $filename = $request->logo->getClientOriginalName();
-                $request->logo->storeAs('public/logo', $filename);
+              
+                $request->logo->storeAs('public/logo', $FileUploadName);
                  //find the business
                  $upload_logo = Business::where('user_id', Auth::user()->id)->first();
-                 $upload_logo->business_logo = $filename;
+                 $upload_logo->business_logo = $FileUploadName;
                  $upload_logo->save();
                  return redirect()->back();
 

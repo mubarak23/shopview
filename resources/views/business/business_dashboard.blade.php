@@ -38,10 +38,17 @@
 	    				<div class="join-us-promo">
 	    					
 	    					@if(!$business_details->business_logo)
-	    					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#locModal">
-         						   Upload Logo
-         					 </button>
-         					 <br>
+                  <form id="w-form" method="post" enctype="multipart/form-data" action="{{ route('upload-logo') }}">
+              {{ csrf_field() }}
+              <div class="form-group">
+                <label for="city">Upload Logo</label>
+                <input type="file" id="logo" name="logo" class="form-control">
+              </div>
+              <div class="modal-footer">
+              <input type="submit" class="btn btn-primary" name="Upload" value="Upload"> 
+            </div>
+            </form>
+	    					
                    <hr>
          					 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#productModal">
          						   Add a Product
@@ -74,7 +81,7 @@
           	{{ csrf_field() }}
             <div class="form-group">
               <label for="city">Upload Logo</label>
-              <input type="file" id="city" name="logo" class="form-control">
+              <input type="file" id="logo" name="logo" class="form-control">
             </div>
             <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -86,7 +93,7 @@
       </div>
     </div>
   </div>
-  
+
   		<!-- Modal product -->
 <div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="locModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
