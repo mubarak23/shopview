@@ -23,9 +23,11 @@ Route::post('/business/process_owner', 'BusinessController@process_business')->n
 Route::get('/business/business_dashboard', 'BusinessController@business_dashboard')->name('business-dashboard');
 Route::get('/business/register_business', 'BusinessController@register_business')->name('add-business');
 Route::post('/business/upload_logo', 'BusinessController@upload_logo')->name('upload-logo');
+Route::get('/business/business_product/{business_id}', 'ProductController@business_products')->name('business_products');
 
 //Product Route
 Route::post('/product/add', 'ProductController@add_product')->name('add-product');
+Route::get('/product/product_detail/{product_id}', 'ProductController@product_details')->name('product_details');
 
 //Admin Route Section
 Route::get('/admin', 'AdminController@admin_dashboard')->name('admin-home');

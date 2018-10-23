@@ -121,6 +121,10 @@
               <label for="city">Product Description</label>
               <textarea type="text" cols="10" rows="10" class="form-control" name="product_description"></textarea> 
             </div>
+             <div class="form-group">
+                <label for="city">Product Image</label>
+                <input type="file" id="image" name="product_image" class="form-control">
+              </div>
             <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           <input type="submit" class="btn btn-primary" name="Upload" value="Upload"> 

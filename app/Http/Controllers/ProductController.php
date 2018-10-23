@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product;
+use App\Business;
+use App\User;
 use DB;
 
 class ProductController extends Controller
@@ -20,6 +22,7 @@ class ProductController extends Controller
     			'price'		=> 'required'
     	]);
 
+    
     	$data = $request->all();
         //return $data;
     	$process_data = self::store($data);
@@ -61,4 +64,24 @@ class ProductController extends Controller
     		}
 
     }
+
+ //product per business
+    public function business_products($business_id){
+        //use bisuness id to get all product
+        $title = 'All Product of a particular business';
+        /*$business = Business::where('user_id', Auth::user()->id)->select('buainess_id')->get();*/
+        //$buainess_id = $buainess->business_id;
+        $all_products = Product::where('business_id', $business_id)->first();
+        return view('business.products.products')->with(['all_products' => $all_products, 'title' => $title]);
+
+    }
+
+    public function product_details($product_id){
+        $title = "Product details";
+        $product_details = Product::where('id', $product_id)->get();
+        return view('business.products.product_details');
+
+    }
+
+
 }
