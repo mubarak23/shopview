@@ -19,11 +19,12 @@
 	    				<h3>Profile</h3>
 	    				<p><label>Name:</label>{{Auth::user()->username}}</p>
 	    				<p><label>Email:</label>{{ Auth::user()->email}}</p>
-	    				<p><label>Number of Product:</label></p>
+	    				<p><label>Number of Product:{{ $number_of_product }}</label></p>
 
 	    			</div>
 	    			<div class="col-md-4">
 	    				<h3>Business Details</h3>
+              
 	    				<p><label>Business Name</label>:{{ $business_details->business_name}}</p>
 	    					<p><label>Address</label>:{{ $business_details->business_address}}</p>
 	    					<p><label>Phone Number</label>{{ $business_details->phone_number}}</p>
@@ -50,13 +51,14 @@
             </form>
 	    					
                    <hr>
-         					 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#productModal">
-         						   Add a Product
-         					 </button>
+         					 
 	    						
 	    					@else
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#productModal">
+                       Add a Product
+                   </button>
 	                    	<div class="author-photo">
-								<img src="img/user2.jpg" alt="Name Surname">
+								<img src="{{ asset('public/logo/. '.' .$business_details->business_logo') }}" alt="Name Surname">
 							</div>
 							@endif
 	    				</div>

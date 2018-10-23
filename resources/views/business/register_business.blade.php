@@ -28,7 +28,7 @@
 	    				<div class="join-us-promo">
 	    					<!-- Quote -->
 							<div class="join-us-bubble">
-								<form method="post" action="{{route('process-owner')}}" aria-label="{{ __('Register') }}">
+								<form method="post" action="{{route('process-owner')}}" enctype="multipart/form-data" aria-label="{{ __('Register') }}">
 								{{ csrf_field() }}
 
 								<div class="form-group">
@@ -85,6 +85,10 @@
 								<div class="form-group">
 		        				 	<label for="email"><i class="icon-lock"></i><b>Website url</b></label>
 									<input class="form-control" id="website_url" name="website_url" type="text" placeholder="Business website">
+								</div>
+								<div class="form-group">
+		        				 	<label for="file"><i class="icon-lock"></i><b>Business Logo</b></label>
+									<input class="form-control" id="logo" name="logo" type="file" placeholder="Business Logo">
 								</div>
 								
 								<div class="form-group">

@@ -25,7 +25,9 @@ class BusinessController extends Controller
     public static function business_dashboard(){
         //get the business details
         $businesss_details = Business::where('user_id', Auth::user()->id)->first();
-        $num_of_product = Product::where('user_id', Auth::user()->id)->first();
+        //return $businesss_details;
+        //coming back()
+        $num_of_product = Product::where('user_id', Auth::user()->id)->count();
 
     	return view('business.business_dashboard')->with(['business_details' => $businesss_details, 'number_of_product' => $num_of_product ]);
     }
@@ -83,6 +85,9 @@ class BusinessController extends Controller
             //collect all data
             $data = $request->all();
 
+            //return $data;
+
+
            //run validation
             $validate_data = $request->validate([
                 'business_name' => 'required',
@@ -95,11 +100,22 @@ class BusinessController extends Controller
                 'website_url'   => 'required'
             ]);
            // 
-           
+            if($request->hasFile('logo')){
+                $logo = $request->file('logo');
+                $random_name = time().mt_rand();
+
+                $FileOriginalName = $request->logo->getClientOriginalName();
+                $FileUploadName = $random_name. '.' .$FileOriginalName;
+
+                $request->logo->storeAs('public/logo', $FileUploadName);
+
+                //$data = ['logo' => $FileUploadName];
+            }
+            
             DB::beginTransaction();
             try{
 
-                self::busniness_store($data);
+                self::busniness_store($data, $FileUploadName);
                 DB::commit();
                 return redirect()->route('business-dashboard')->with('status', 'Business Account Successfully Created');
 
@@ -109,9 +125,9 @@ class BusinessController extends Controller
             }
     }
 
-    public function busniness_store($data){
+    public function busniness_store($data, $FileUploadName){
 
-            $working_days = $data['start_day']. ' ' .$data['close_day'];
+            $working_days = $data['start_day']. '.' .$data['close_day'];
             //create new business
             $register_business = new Business();
             $register_business->user_id = Auth::user()->id;
@@ -119,11 +135,12 @@ class BusinessController extends Controller
             $register_business->business_name = $data['business_name'];
             $register_business->business_address = $data['business_address'];
             $register_business->opening_hours = $data['opening_hours'];
-            $register_business->working_days = $working_days;
+            $register_business->working_days =  $working_days;
             $register_business->phone_number = $data['phone_number'];
             $register_business->email = $data['email'];
             $register_business->business_type = $data['type'];
             $register_business->website_url = $data['website_url'];
+            $register_business->business_logo = $FileUploadName;
 
             $register_business->save();
             return $register_business;
